@@ -161,7 +161,7 @@ public class TelaPrincipal extends JFrame {
 				System.out.println(cliente.getNome());
 				
 				if(clienteExiste) {
-					pnlSaida.setText("Acesso liberado!");
+					pnlSaida.setText("Acesso liberado, " + entrada + "!");
 					acessoLiberado = true;
 				}else {
 					pnlSaida.setText("Sem acesso ao sistema! Faça seu cadastro.");
