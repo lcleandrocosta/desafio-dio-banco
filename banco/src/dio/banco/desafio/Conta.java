@@ -8,15 +8,16 @@ public abstract class Conta implements IConta {
 	
 	// Atributos globais
 	protected int agencia;
-	protected int numero;
+	protected int numeroConta;
 	protected double saldo;
 	protected Cliente cliente;
 	
-	// Método contrutor
+	// Método construtor
 	public Conta(Cliente cliente) {
 		this.agencia = Conta.AGENCIA_PADRAO;
-		this.numero = SEQUENCIAL++;
+		this.numeroConta = SEQUENCIAL++;
 		this.cliente = cliente;
+		this.saldo = 0;
 	}
 	
 	@Override
@@ -39,18 +40,19 @@ public abstract class Conta implements IConta {
 		return agencia;
 	}
 	
-	public int getNumero() {
-		return numero;
+	public int getNumeroConta() {
+		return numeroConta;
 	}
 	
 	public double getSaldo() {
 		return saldo;
 	}
 	
-	protected void imprimirInfoComuns() {
+	protected String imprimirInfoComuns() {
 		System.out.println(String.format("Titular: %s", this.cliente.getNome()));
 		System.out.println(String.format("Agencia: %d", this.agencia));
-		System.out.println(String.format("Numero: %d", this.numero));
+		System.out.println(String.format("Numero da Conta: %d", this.numeroConta));
 		System.out.println(String.format("Saldo: %.2f", this.saldo));
+		return "";
 	}
 }

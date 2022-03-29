@@ -6,8 +6,9 @@ public class ContaPoupanca extends Conta {
 		super(cliente);
 	}
 
-	public void imprimirExtrato() {
+	public String imprimirExtrato() {
 		System.out.println("\"******* Extrato Conta Poupança  *******");
 		super.imprimirInfoComuns();
+		return "";
 	}
 }

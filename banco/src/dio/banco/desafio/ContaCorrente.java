@@ -6,9 +6,9 @@ public class ContaCorrente extends Conta {
 		super(cliente);
 	}
 	
-	@Override
-	public void imprimirExtrato() {
+	public String imprimirExtrato() {
 		System.out.println("******* Extrato Conta Corrente *******");
 		super.imprimirInfoComuns();
+		return "";
 	}
 }
