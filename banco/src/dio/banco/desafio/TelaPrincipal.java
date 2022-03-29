@@ -27,6 +27,7 @@ public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private boolean acessoLiberado = false; // Acesso ao sistema
+	boolean clienteExiste = false;
 	
 	Cliente cliente;
 	Conta conta;
@@ -81,7 +82,11 @@ public class TelaPrincipal extends JFrame {
 		lblsubTitulo.setBounds(195, 44, 190, 39);
 		contentPane.add(lblsubTitulo);
 		
-		// Botões
+		/**
+		 * Botões da tela principal.
+		 */
+		
+		// Botão saque
 		JButton btnSaque = new JButton("Saque");
 		btnSaque.setSize(20, 20);
 		btnSaque.setBounds(10, 98, 139, 58);
@@ -91,6 +96,7 @@ public class TelaPrincipal extends JFrame {
 		btnSaque.setFont(new Font("Dialog", Font.BOLD, 20));
 		contentPane.add(btnSaque);
 		
+		// Botão depositar
 		JButton btnDepositar = new JButton("Depositar");
 		btnDepositar.setToolTipText("");
 		btnDepositar.setForeground(Color.BLUE);
@@ -99,6 +105,7 @@ public class TelaPrincipal extends JFrame {
 		btnDepositar.setBounds(10, 175, 139, 58);
 		contentPane.add(btnDepositar);
 		
+		// Botão transferir
 		JButton btnTransferir = new JButton("Transferir");
 		btnTransferir.setToolTipText("");
 		btnTransferir.setForeground(Color.BLUE);
@@ -107,6 +114,7 @@ public class TelaPrincipal extends JFrame {
 		btnTransferir.setBounds(425, 98, 139, 58);
 		contentPane.add(btnTransferir);
 		
+		// Botão extrato
 		JButton btnExtrato = new JButton("Extrato");
 		btnExtrato.setToolTipText("");
 		btnExtrato.setForeground(Color.BLUE);
@@ -122,7 +130,7 @@ public class TelaPrincipal extends JFrame {
 		btnEntrar.setBounds(172, 175, 236, 58);
 		contentPane.add(btnEntrar);
 		
-		// Pinel de saída de infromações
+		// Pinel de saída de informações
 		JEditorPane pnlSaida = new JEditorPane();
 		pnlSaida.setText("Bem vindo a seu banco digital!");
 		pnlSaida.setForeground(Color.BLUE);
@@ -130,12 +138,14 @@ public class TelaPrincipal extends JFrame {
 		pnlSaida.setBounds(172, 98, 236, 58);
 		contentPane.add(pnlSaida);
 		
+		// Rodapé
 		JLabel lblRodape = new JLabel("Desenvolvido por Leandro Costa@2022");
 		lblRodape.setFont(new Font("Dialog", Font.PLAIN, 11));
 		lblRodape.setForeground(Color.WHITE);
 		lblRodape.setBounds(193, 260, 238, 14);
 		contentPane.add(lblRodape);
 		
+		// Imagem
 		JLabel lblImg = new JLabel("");
 		lblImg.setBounds(454, 11, 106, 72);
 		lblImg.setIcon(new ImageIcon("img/logo-philips.png"));
@@ -154,7 +164,7 @@ public class TelaPrincipal extends JFrame {
 				entrada = JOptionPane.showInputDialog("Digite seu nome: ");
 				cliente.setNome(entrada);
 				
-				boolean clienteExiste = false;
+				
 				
 				clienteExiste = cliente.getNome().equals(entrada);
 				System.out.println(clienteExiste);
@@ -226,13 +236,18 @@ public class TelaPrincipal extends JFrame {
 				valorDeposito = Double.parseDouble(valorEntrada);
 				valorValido = valorDeposito <= 0;
 				
-				if(!valorValido) {
-					conta.depositar(valorDeposito);
-					pnlSaida.setText("Déposito realizado com sucesso!");
+				if(acessoLiberado) {
+					if(!valorValido) {
+						conta.depositar(valorDeposito);
+						pnlSaida.setText("Déposito realizado com sucesso!");
+					}else {
+						pnlSaida.setText("Valor Inválido! Entre com um valor válido!");
+					}
 				}else {
-					pnlSaida.setText("Valor Inválido! Entre com um valor válido!");
-				}
-				
+					JOptionPane.showMessageDialog(null, "Identifique-se");
+					pnlSaida.setText("");
+					pnlSaida.setText("Clique no botão ENTRAR!");
+				}					
 			}
 		});
 		
